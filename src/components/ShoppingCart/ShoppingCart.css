@@ -1,0 +1,85 @@
+.shoppingCart {
+  background-image: url("../../../public/shopping-cart.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.shoppingCartBox {
+  background: #1a1a40;
+  color: white;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 5px 10px black;
+}
+
+h1 {
+  color: #fff;
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+}
+
+.ShoppingCartWrapper {
+  background: #1a1a40;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 5px 10px;
+}
+
+.ShoppingCartForm {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.item-input {
+  outline: none;
+  background: none;
+  border: 1px solid #8758ff;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  width: 300px;
+  color: #fff;
+}
+
+.item-input::placeholder {
+  color: #ffffff4d;
+}
+
+.item-btn {
+  background: #8758ff;
+  color: #fff;
+  border: none;
+  padding: 0.55rem;
+  cursor: pointer;
+}
+
+.Item {
+  display: flex;
+  align-items: center;
+  background: #8758ff;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.checkItem {
+  display: flex;
+  align-items: center;
+}
+
+.check {
+  width: 15px;
+  height: 15px;
+  margin-right: 0.7rem;
+  cursor: pointer;
+}
+
+.manageItem {
+  margin-left: auto;
+}
+
+.noItems {
+  text-align: center;
+}
