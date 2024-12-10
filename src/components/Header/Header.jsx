@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import "./Header.css";
+import Menu from "./Menu";
 
 function Header() {
   return (
@@ -15,20 +15,10 @@ function Header() {
         <i className="fas fa-bars"></i>
       </label>
       <nav className="menu">
-        <Link to="/todo">
-          <i className="fas fa-list"></i> To-Do List
-        </Link>
-        <Link to="/cart">
-          <i className="fas fa-shopping-cart"></i> Shopping Cart
-        </Link>
+        <Menu />
       </nav>
       <nav className="dropdown-menu">
-        <Link to="/todo">
-          <i className="fas fa-list"></i> To-Do List
-        </Link>
-        <Link to="/cart">
-          <i className="fas fa-shopping-cart"></i> Shopping Cart
-        </Link>
+        <Menu />
       </nav>
     </header>
   );

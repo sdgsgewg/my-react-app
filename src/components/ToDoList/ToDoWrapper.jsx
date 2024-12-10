@@ -1,78 +1,17 @@
-import { useEffect, useState } from "react";
-import ToDoForm from "./ToDoForm";
-import { v4 as uuidv4 } from "uuid";
+import SearchBox from "./SearchBox";
+import SortTaskButton from "./SortTasksButton";
+import AddTaskButton from "./AddTaskButton";
 import ToDo from "./ToDo";
-import EditToDoForm from "./EditToDoForm";
 import "./ToDoList.css";
-
-const todoLists = [
-  {
-    id: uuidv4(),
-    task: "mandi",
-    completed: false,
-    isEditing: false,
-  },
-  {
-    id: uuidv4(),
-    task: "makan",
-    completed: false,
-    isEditing: false,
-  },
-  {
-    id: uuidv4(),
-    task: "belajar",
-    completed: false,
-    isEditing: false,
-  },
-  {
-    id: uuidv4(),
-    task: "tidur",
-    completed: false,
-    isEditing: false,
-  },
-];
+import { useToDoContext } from "./ToDoProvider";
 
 export default function ToDoWrapper() {
-  const [todos, setTodos] = useState(todoLists);
-
-  const addTodo = (todo) => {
-    setTodos([
-      ...todos,
-      {
-        id: uuidv4(),
-        task: todo,
-        completed: false,
-        isEditing: false,
-      },
-    ]);
-  };
-
-  useEffect(() => {
-    console.log(todos);
-  }, [todos]);
+  const { todos, setTodos } = useToDoContext();
 
   const toggleComplete = (id) => {
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  };
-
-  const editTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
-      )
-    );
-  };
-
-  const updateTask = (task, id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id
-          ? { ...todo, task: task, isEditing: !todo.isEditing }
-          : todo
       )
     );
   };
@@ -84,21 +23,26 @@ export default function ToDoWrapper() {
   return (
     <>
       <main className="ToDoList">
-        <div className="TodoWrapper">
-          <h1>My To-Do List</h1>
-          <ToDoForm addTodo={addTodo} />
-          {todos.map((todo) =>
-            todo.isEditing ? (
-              <EditToDoForm task={todo} key={todo.id} updateTodo={updateTask} />
-            ) : (
+        <div className="w-[500px] bg-[#1a1a40] p-8 rounded-md shadow-md">
+          <h1 className="text-white mb-2 text-3xl">My To-Do List</h1>
+          <div className="flex justify-between items-center gap-4">
+            <SearchBox />
+            <SortTaskButton />
+          </div>
+
+          <AddTaskButton />
+
+          {todos.length > 0 ? (
+            todos.map((todo) => (
               <ToDo
                 task={todo}
                 key={todo.id}
                 toggleComplete={toggleComplete}
-                editTodo={editTodo}
                 deleteTodo={deleteTodo}
               />
-            )
+            ))
+          ) : (
+            <p className="text-white text-lg text-center mt-4">No Task Found</p>
           )}
         </div>
       </main>
