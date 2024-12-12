@@ -10,9 +10,13 @@ export default function TransactionList() {
     <>
       <h3>History</h3>
       <ul className="list">
-        {transactions.map((transaction) => (
-          <Transaction key={transaction.id} transaction={transaction} />
-        ))}
+        {transactions.length > 0 ? (
+          transactions.map((transaction) => (
+            <Transaction key={transaction.id} transaction={transaction} />
+          ))
+        ) : (
+          <p>No transaction yet.</p>
+        )}
       </ul>
     </>
   );

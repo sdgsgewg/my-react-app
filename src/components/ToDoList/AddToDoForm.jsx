@@ -4,7 +4,10 @@ import { v4 as uuidv4 } from "uuid";
 import { useToDoContext } from "./ToDoProvider";
 
 export default function AddToDoForm() {
-  const [value, setValue] = useState("");
+  const [name, setName] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -16,27 +19,61 @@ export default function AddToDoForm() {
     navigate("/todo");
   };
 
-  const addTodo = (todo) => {
+  const addTodo = (name, startTime, endTime) => {
     setTodos([
       ...todos,
       {
         id: uuidv4(),
-        task: todo,
+        task: name,
+        startTime: startTime,
+        endTime: endTime,
         completed: false,
       },
     ]);
   };
 
+  const validateTime = (startTime, endTime) => {
+    const [startHour, startMinute] = startTime.split(":").map(Number);
+    const [endHour, endMinute] = endTime.split(":").map(Number);
+
+    if (
+      endHour < startHour ||
+      (endHour === startHour && endMinute <= startMinute)
+    ) {
+      alert("End Time can't be earlier than or same with Start Time!");
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (value === "") {
-      alert("Task can't be empty!");
+    if (name === "") {
+      alert("Name can't be empty!");
+      return;
+    }
+    if (startTime === "") {
+      alert("Start Time can't be empty");
+      return;
+    }
+    if (endTime === "") {
+      alert("Start Time can't be empty");
       return;
     }
 
-    addTodo(value);
-    setValue("");
+    if (!validateTime(startTime, endTime)) {
+      console.log("Time validation failed.");
+      return;
+    } else {
+      console.log("Time validation passed.");
+    }
+
+    addTodo(name, startTime, endTime);
+    setName("");
+    setStartTime("");
+    setEndTime("");
 
     navigate("/todo", { state: { message: "Task added successfully!" } });
   };
@@ -45,21 +82,57 @@ export default function AddToDoForm() {
     <main className="ToDoList">
       <div className="w-[500px] bg-[#1a1a40] text-white p-8 rounded-md shadow-md">
         <h1 className="text-xl font-bold mb-4">{title}</h1>
+
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          {/* Name Field */}
           <div className="flex flex-col gap-1">
             <label className="text-lg font-medium" htmlFor="name">
-              Name
+              Task
             </label>
             <input
               type="text"
               className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8758ff] text-black"
               name="name"
               id="name"
-              value={value}
+              value={name}
               placeholder="Enter task name"
-              onChange={(e) => setValue(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
+
+          {/* Start Time Field */}
+          <div className="flex flex-col gap-1">
+            <label className="text-lg font-medium" htmlFor="start-time">
+              Start Time
+            </label>
+            <input
+              type="time"
+              className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8758ff] text-black"
+              name="start-time"
+              id="start-time"
+              value={startTime}
+              placeholder="Enter task start time"
+              onChange={(e) => setStartTime(e.target.value)}
+            />
+          </div>
+
+          {/* End Time Field */}
+          <div className="flex flex-col gap-1">
+            <label className="text-lg font-medium" htmlFor="end-time">
+              End Time
+            </label>
+            <input
+              type="time"
+              className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8758ff] text-black"
+              name="end-time"
+              id="end-time"
+              value={endTime}
+              placeholder="Enter task end time"
+              onChange={(e) => setEndTime(e.target.value)}
+            />
+          </div>
+
+          {/* Control Button */}
           <div className="flex gap-2">
             <button
               type="button"

@@ -23,7 +23,7 @@ export default function ToDoWrapper() {
   return (
     <>
       <main className="ToDoList">
-        <div className="w-[500px] bg-[#1a1a40] p-8 rounded-md shadow-md">
+        <div className="w-[70vw] w-lg-[60vw] h-[80vh] bg-[#1a1a40] p-8 rounded-md shadow-md">
           <h1 className="text-white mb-2 text-3xl">My To-Do List</h1>
           <div className="flex justify-between items-center gap-4">
             <SearchBox />
@@ -32,18 +32,22 @@ export default function ToDoWrapper() {
 
           <AddTaskButton />
 
-          {todos.length > 0 ? (
-            todos.map((todo) => (
-              <ToDo
-                task={todo}
-                key={todo.id}
-                toggleComplete={toggleComplete}
-                deleteTodo={deleteTodo}
-              />
-            ))
-          ) : (
-            <p className="text-white text-lg text-center mt-4">No Task Found</p>
-          )}
+          <div className="to-do-lists max-h-[42vh] overflow-y-scroll flex flex-col gap-3">
+            {todos.length > 0 ? (
+              todos.map((todo) => (
+                <ToDo
+                  task={todo}
+                  key={todo.id}
+                  toggleComplete={toggleComplete}
+                  deleteTodo={deleteTodo}
+                />
+              ))
+            ) : (
+              <p className="text-white text-lg text-center mt-4">
+                No Task Found
+              </p>
+            )}
+          </div>
         </div>
       </main>
     </>

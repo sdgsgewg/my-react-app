@@ -5,20 +5,25 @@
   background-position: center;
 }
 
-#sort-checkbox {
-  display: none;
-  margin: 0;
-}
-
-.sort-icon {
-  margin: 0;
-}
-
-.sort-options {
-  display: none;
-  z-index: 100;
-}
-
 #sort-checkbox:checked ~ .sort-options {
   display: block;
+}
+
+/* Custom scrollbar */
+.to-do-lists::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+.to-do-lists::-webkit-scrollbar-track {
+  background: #1a1a40;
+}
+
+.to-do-lists::-webkit-scrollbar-thumb {
+  background-color: #8758ff;
+  border-radius: 10px;
+  border: 2px solid #1a1a40;
+}
+
+.to-do-lists::-webkit-scrollbar-thumb:hover {
+  background-color: #6c4ccd;
 }

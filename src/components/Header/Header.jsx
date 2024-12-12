@@ -11,7 +11,7 @@ function Header() {
         name="hamburger"
         id="hamburger"
       />
-      <label htmlFor="hamburger" className="hamburger-menu">
+      <label htmlFor="hamburger" className="hamburger-menu cursor-pointer">
         <i className="fas fa-bars"></i>
       </label>
       <nav className="menu">

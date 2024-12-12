@@ -18,12 +18,22 @@ export default function ToDo({ task, toggleComplete, deleteTodo }) {
   return (
     <>
       <div
-        className={`flex justify-between items-center bg-[#8758ff] text-white px-3 py-4 rounded-md mb-4 cursor-pointer ${
+        className={`flex items-center bg-[#8758ff] text-white px-3 py-4 rounded-md cursor-pointer ${
           task.completed ? "completed" : ""
         } hover:bg-[#6c4ccd] transition duration-300`}
       >
-        <p onClick={() => toggleComplete(task.id)}>{task.task}</p>
         <div>
+          <input
+            className="w-4 h-4 cursor-pointer"
+            type="checkbox"
+            onClick={() => toggleComplete(task.id)}
+          />
+        </div>
+        <div className="flex flex-col gap-1 ms-4">
+          <p>{task.task}</p>
+          <small>{task.startTime + " - " + task.endTime}</small>
+        </div>
+        <div className="ms-auto">
           <FontAwesomeIcon
             className="edit-icon"
             icon={faPenToSquare}

@@ -1,24 +1,29 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useToDoContext } from "./ToDoProvider";
 
 export default function SearchBox() {
   const [value, setValue] = useState("");
+  const { todos, setTodos, originalTodos } = useToDoContext();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSearchChange = (e) => {
+    const searchValue = e.target.value;
+    setValue(searchValue);
 
-    if (value === "") {
-      alert("Keyword can't be empty!");
-      return;
+    if (searchValue === "") {
+      setTodos(originalTodos);
+    } else {
+      const filteredTodos = todos.filter((todo) =>
+        todo.task.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      setTodos(filteredTodos);
     }
-
-    setValue("");
   };
 
   return (
     <>
-      <form className="w-[100%]" onSubmit={handleSubmit}>
+      <form className="w-[100%]" onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
           className="w-[85%] outline-none bg-none border border-[#8758ff] px-2 py-3 mt-4 mb-3 text-black"
@@ -26,7 +31,7 @@ export default function SearchBox() {
           id="search"
           value={value}
           placeholder="Search..."
-          onChange={(e) => setValue(e.target.value)}
+          onChange={handleSearchChange}
         />
         <button
           type="submit"
