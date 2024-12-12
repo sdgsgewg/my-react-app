@@ -1,5 +1,5 @@
 .shoppingCart {
-  background-image: url("../../../public/shopping-cart.jpg");
+  background-image: url("/shopping-cart.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

@@ -23,7 +23,7 @@ export default function ToDoWrapper() {
   return (
     <>
       <main className="ToDoList">
-        <div className="w-[70vw] w-lg-[60vw] h-[80vh] bg-[#1a1a40] p-8 rounded-md shadow-md">
+        <div className="w-[80vw] sm:w-[70vw] md:w-[60vw] lg:w-[50vw] xl:w-[40vw] h-[80vh] bg-[#1a1a40] p-8 rounded-md shadow-md">
           <h1 className="text-white mb-2 text-3xl">My To-Do List</h1>
           <div className="flex justify-between items-center gap-4">
             <SearchBox />
